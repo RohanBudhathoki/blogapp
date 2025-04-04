@@ -1,4 +1,5 @@
-import 'package:blogapp/features/presentation/authentication/sign_up.dart';
+import 'package:blogapp/features/presentation/authentication/login.dart';
+
 import 'package:flutter/material.dart';
 
 class BlogApp extends StatelessWidget {
@@ -6,6 +7,6 @@ class BlogApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: SignUpScreen());
+    return MaterialApp(home: LoginScreen());
   }
 }

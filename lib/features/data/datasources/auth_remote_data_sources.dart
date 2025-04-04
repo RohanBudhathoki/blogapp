@@ -23,18 +23,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
-    throw UnimplementedError();
-    // try {
-    //   final response = supabaseClient.auth.signInWithPassword(
-    //     password: password,
-    //     email: email,
-    //   );
-    //   String sucess = 'hello'
-
-    //  =
-    // } catch (e) {
-    //   throw ServerException(e.toString());
-    // }
+    try {
+      final response = await supabaseClient.auth.signInWithPassword(
+        password: password,
+        email: email,
+      );
+      if (response.user == null) {
+        throw const ServerException('User is null');
+      }
+      return UserModel.fromJson(response.user!.toJson());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   @override

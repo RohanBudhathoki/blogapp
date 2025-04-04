@@ -9,8 +9,8 @@ import 'package:blogapp/features/res/space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +34,7 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SpaceH200(),
-                  RegisterTextfield(
-                    obscureText: false,
-                    keyboardType: TextInputType.emailAddress,
-                    controller: controller.nameController,
-                    hintText: 'Name',
-                  ),
-                  SpaceH20(),
+
                   RegisterTextfield(
                     controller: controller.emailController,
                     obscureText: false,
@@ -68,7 +62,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    text: 'Sign up',
+                    text: 'Login',
                   ),
                 ],
               ),
