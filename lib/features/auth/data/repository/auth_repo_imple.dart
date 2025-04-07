@@ -48,4 +48,17 @@ class AuthRepoImple implements AuthRepo {
       return left(Failure(message: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, User>> currentUser() async {
+    try {
+      final user = await remoteDataSource.currentUser();
+      if (user == null) {
+        return left(Failure(message: 'User not Loged in !'));
+      }
+      return right(user);
+    } catch (e) {
+      return left(Failure(message: e.toString()));
+    }
+  }
 }

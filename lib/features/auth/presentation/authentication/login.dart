@@ -55,10 +55,9 @@ class LoginScreen extends StatelessWidget {
                   CommonAuthButton(
                     onPressed: () async {
                       context.read<AuthBloc>().add(
-                        AuthSignUp(
+                        AuthLogin(
                           email: controller.emailController.text,
                           password: controller.passwordController.text,
-                          name: controller.nameController.text,
                         ),
                       );
                     },
