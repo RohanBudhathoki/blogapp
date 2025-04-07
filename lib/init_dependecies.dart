@@ -10,15 +10,22 @@ import 'package:blogapp/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-final serviceLocater = GetIt.instance;
+GetIt serviceLocater = GetIt.instance;
 Future<void> initDependecies() async {
   final supabase = await Supabase.initialize(
     url: AppSecret.superBaseUrl,
     anonKey: AppSecret.supaBaseSecretKey,
   );
+
   serviceLocater.registerLazySingleton(() => supabase.client);
   serviceLocater.registerLazySingleton(() => AppUserCubit());
   _initAuth();
+  if (!serviceLocater.isRegistered<SupabaseClient>()) {
+    serviceLocater.registerLazySingleton(() => supabase.client);
+  }
+  if (!serviceLocater.isRegistered<AppUserCubit>()) {
+    serviceLocater.registerLazySingleton(() => AppUserCubit());
+  }
 }
 
 void _initAuth() {

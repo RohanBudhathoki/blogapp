@@ -1,5 +1,7 @@
-import 'package:blogapp/core/theme/color.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:blogapp/core/theme/color.dart';
 
 class RegisterTextfield extends StatelessWidget {
   TextEditingController? controller;
@@ -9,13 +11,13 @@ class RegisterTextfield extends StatelessWidget {
 
   final Icon? imagesuffix;
   RegisterTextfield({
-    super.key,
+    Key? key,
     this.controller,
     required this.hintText,
-    this.imagesuffix,
     required this.keyboardType,
     required this.obscureText,
-  });
+    this.imagesuffix,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
