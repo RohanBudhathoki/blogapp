@@ -1,8 +1,8 @@
 import 'package:blogapp/core/error/exception.dart';
 import 'package:blogapp/core/error/failure.dart';
-import 'package:blogapp/features/data/datasources/auth_remote_data_sources.dart';
-import 'package:blogapp/features/domain/entities/user.dart';
-import 'package:blogapp/features/domain/repository/auth_repo.dart';
+import 'package:blogapp/features/auth/data/datasources/auth_remote_data_sources.dart';
+import 'package:blogapp/core/common/entities/user.dart';
+import 'package:blogapp/features/auth/domain/repository/auth_repo.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:supabase/supabase.dart' as sb;
 

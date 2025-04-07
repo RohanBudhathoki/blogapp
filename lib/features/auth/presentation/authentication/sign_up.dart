@@ -2,10 +2,10 @@ import 'package:blogapp/core/common/widgets/loader.dart';
 import 'package:blogapp/core/controller/controller_text.dart';
 import 'package:blogapp/core/theme/color.dart';
 import 'package:blogapp/core/utils/utils.dart';
-import 'package:blogapp/features/presentation/authentication/widget/common_authbutton.dart';
-import 'package:blogapp/features/presentation/authentication/widget/common_textform.dart';
-import 'package:blogapp/features/presentation/bloc/auth_bloc.dart';
-import 'package:blogapp/features/res/space.dart';
+import 'package:blogapp/features/auth/presentation/authentication/widget/common_authbutton.dart';
+import 'package:blogapp/features/auth/presentation/authentication/widget/common_textform.dart';
+import 'package:blogapp/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blogapp/core/res/space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

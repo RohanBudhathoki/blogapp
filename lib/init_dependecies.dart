@@ -1,11 +1,12 @@
+import 'package:blogapp/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:blogapp/core/secrets/app_secret.dart';
-import 'package:blogapp/features/data/datasources/auth_remote_data_sources.dart';
-import 'package:blogapp/features/data/repository/auth_repo_imple.dart';
-import 'package:blogapp/features/domain/repository/auth_repo.dart';
-import 'package:blogapp/features/domain/usecases/user_current.dart';
-import 'package:blogapp/features/domain/usecases/user_login.dart';
-import 'package:blogapp/features/domain/usecases/user_sign_up.dart';
-import 'package:blogapp/features/presentation/bloc/auth_bloc.dart';
+import 'package:blogapp/features/auth/data/datasources/auth_remote_data_sources.dart';
+import 'package:blogapp/features/auth/data/repository/auth_repo_imple.dart';
+import 'package:blogapp/features/auth/domain/repository/auth_repo.dart';
+import 'package:blogapp/features/auth/domain/usecases/user_current.dart';
+import 'package:blogapp/features/auth/domain/usecases/user_login.dart';
+import 'package:blogapp/features/auth/domain/usecases/user_sign_up.dart';
+import 'package:blogapp/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -16,6 +17,7 @@ Future<void> initDependecies() async {
     anonKey: AppSecret.supaBaseSecretKey,
   );
   serviceLocater.registerLazySingleton(() => supabase.client);
+  serviceLocater.registerLazySingleton(() => AppUserCubit());
   _initAuth();
 }
 
@@ -33,6 +35,7 @@ void _initAuth() {
         userSignup: serviceLocater(),
         userLogin: serviceLocater(),
         userCurrent: serviceLocater(),
+        appUser: serviceLocater(),
       ),
     );
 }
