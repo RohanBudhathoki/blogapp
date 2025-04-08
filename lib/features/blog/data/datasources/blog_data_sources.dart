@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:blogapp/core/error/exception.dart';
@@ -31,13 +32,9 @@ class BlogDataSourcesimpl implements BlogRemoteDataSources {
     required BlogModel blog,
   }) async {
     try {
-      await supabaseClient.storage
-          .from('blogimage')
-          .upload(blog.blogImage, image);
+      await supabaseClient.storage.from('blog_url').upload(blog.id, image);
 
-      return supabaseClient.storage
-          .from('blogimage')
-          .getPublicUrl(blog.blogImage);
+      return supabaseClient.storage.from('blogimages').getPublicUrl(blog.id);
     } catch (e) {
       throw ServerException(e.toString());
     }

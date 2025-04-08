@@ -18,14 +18,14 @@ class BlogBlocBloc extends Bloc<BlogBlocEvent, BlogBlocState> {
   void _onBlogUpload(BlogUpload event, Emitter<BlogBlocState> emit) async {
     final res = await uploadBlog(
       UpdateBlogParams(
-        id: event.id,
         content: event.content,
         title: event.title,
         posterid: event.posterid,
-        dateTime: event.dateTime,
+
         blogImage: event.blogImage,
       ),
     );
+
     res.fold(
       (l) => emit(Blogblocfailure(l.message)),
       (r) => emit(BlogblocSucess()),

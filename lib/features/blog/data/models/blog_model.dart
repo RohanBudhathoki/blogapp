@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:blogapp/features/blog/domain/entities/blog.dart';
 
 class BlogModel extends Blog {
@@ -12,25 +14,25 @@ class BlogModel extends Blog {
   Map<String, dynamic> tojson() {
     return <String, dynamic>{
       'id': id,
-      'content': content,
+      'description': content,
       'title': title,
       'poster_id': posterid,
       'updated_at': dateTime.toIso8601String(),
-      'blogImage': blogImage,
+      'blogimage': blogImage,
     };
   }
 
   factory BlogModel.fromjson(Map<String, dynamic> map) {
     return BlogModel(
       id: map['id'] as String,
-      content: map['content'] as String,
+      content: map['description'] as String,
       title: map['title'] as String,
       posterid: map['poster_id'] as String,
       dateTime:
           map['update_at'] == null
               ? DateTime.now()
               : DateTime.parse(map['updated_at']),
-      blogImage: map['blogImage'] as String,
+      blogImage: map['blogimage'] as String,
     );
   }
   BlogModel copyWith({
