@@ -16,7 +16,7 @@ class BlogBlocBloc extends Bloc<BlogBlocEvent, BlogBlocState> {
     on<BlogUpload>(_onBlogUpload);
   }
   void _onBlogUpload(BlogUpload event, Emitter<BlogBlocState> emit) async {
-    final res = uploadBlog(
+    final res = await uploadBlog(
       UpdateBlogParams(
         id: event.id,
         content: event.content,
@@ -26,6 +26,9 @@ class BlogBlocBloc extends Bloc<BlogBlocEvent, BlogBlocState> {
         blogImage: event.blogImage,
       ),
     );
-    // res left to fold
+    res.fold(
+      (l) => emit(Blogblocfailure(l.message)),
+      (r) => emit(BlogblocSucess()),
+    );
   }
 }

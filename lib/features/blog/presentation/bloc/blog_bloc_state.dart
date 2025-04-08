@@ -9,4 +9,8 @@ final class BlogblocLoading extends BlogBlocState {}
 
 final class BlogblocSucess extends BlogBlocState {}
 
-final class Blogblocfailure extends BlogBlocState {}
+final class Blogblocfailure extends BlogBlocState {
+  final String message;
+
+  Blogblocfailure(this.message);
+}

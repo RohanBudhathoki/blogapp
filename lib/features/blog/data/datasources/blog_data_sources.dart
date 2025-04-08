@@ -12,7 +12,7 @@ abstract interface class BlogRemoteDataSources {
 class BlogDataSourcesimpl implements BlogRemoteDataSources {
   final SupabaseClient supabaseClient;
 
-  BlogDataSourcesimpl({required this.supabaseClient});
+  BlogDataSourcesimpl(this.supabaseClient);
 
   @override
   Future<BlogModel> updateBlog(BlogModel blog) async {

@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:blogapp/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:blogapp/core/res/space.dart';
 import 'package:blogapp/core/utils/pick_image.dart';
 import 'package:blogapp/features/blog/presentation/add_blog/widget/blog_textfield.dart';
+import 'package:blogapp/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddBlogScreen extends StatefulWidget {
   const AddBlogScreen({super.key});
@@ -15,7 +18,8 @@ class AddBlogScreen extends StatefulWidget {
 
 class _AddBlogScreenState extends State<AddBlogScreen> {
   File? imagePicked;
-
+  TextEditingController titleController = TextEditingController();
+  TextEditingController contentController = TextEditingController();
   void selectedImage() async {
     final pickedImage = await pickImageFile();
     if (pickedImage != null) {
@@ -26,11 +30,36 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
   }
 
   @override
+  void dispose() {
+    titleController.dispose();
+    contentController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.check_mark)),
+          IconButton(
+            onPressed: () {
+              final posterId =
+                  (context.read<AppUserCubit>().state as AppUserLoggedIn)
+                      .user
+                      .id;
+              if (imagePicked != null)
+                context.read<BlogBlocBloc>().add(
+                  BlogUpload(
+                    content: contentController.text.trim(),
+                    title: titleController.text.trim(),
+                    posterid: posterId,
+                    dateTime: DateTime.now(),
+                    blogImage: imagePicked!,
+                  ),
+                );
+            },
+            icon: Icon(CupertinoIcons.check_mark),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -55,9 +84,16 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
                 ),
               ),
               SpaceH20(),
-              BlogTextfield(hintText: 'Blog Title', maxLines: 1),
+              BlogTextfield(
+                hintText: 'Blog Title',
+                maxLines: 1,
+                controller: titleController,
+              ),
               SpaceH20(),
-              BlogTextfield(hintText: 'Blog Description'),
+              BlogTextfield(
+                hintText: 'Blog Description',
+                controller: contentController,
+              ),
               SpaceH20(),
             ],
           ),

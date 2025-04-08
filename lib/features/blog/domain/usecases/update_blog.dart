@@ -10,7 +10,7 @@ import 'package:fpdart/fpdart.dart';
 class UpdateBlog implements UseCase<Blog, UpdateBlogParams> {
   final BlogRepo blogRepo;
 
-  UpdateBlog({required this.blogRepo});
+  UpdateBlog(this.blogRepo);
 
   @override
   Future<Either<Failure, Blog>> call(UpdateBlogParams params) async {
@@ -24,7 +24,6 @@ class UpdateBlog implements UseCase<Blog, UpdateBlogParams> {
 }
 
 class UpdateBlogParams {
-  final String id;
   final String content;
   final String title;
   final String posterid;
@@ -32,7 +31,6 @@ class UpdateBlogParams {
   final File blogImage;
 
   UpdateBlogParams({
-    required this.id,
     required this.content,
     required this.title,
     required this.posterid,

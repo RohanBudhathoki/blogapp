@@ -6,7 +6,12 @@ class BlogTextfield extends StatelessWidget {
   final String hintText;
   final int? maxLines;
 
-  BlogTextfield({super.key, required this.hintText, this.maxLines});
+  BlogTextfield({
+    super.key,
+    required this.hintText,
+    this.maxLines,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,6 @@ part of 'blog_bloc_bloc.dart';
 sealed class BlogBlocEvent {}
 
 final class BlogUpload extends BlogBlocEvent {
-  final String id;
   final String content;
   final String title;
   final String posterid;
@@ -12,7 +11,6 @@ final class BlogUpload extends BlogBlocEvent {
   final File blogImage;
 
   BlogUpload({
-    required this.id,
     required this.content,
     required this.title,
     required this.posterid,

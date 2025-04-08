@@ -14,7 +14,7 @@ class BlogRepoImple implements BlogRepo {
   final BlogRemoteDataSources remoteDataSources;
   var uuid = Uuid();
 
-  BlogRepoImple({required this.remoteDataSources});
+  BlogRepoImple(this.remoteDataSources);
 
   @override
   Future<Either<Failure, Blog>> uploadBlog({
