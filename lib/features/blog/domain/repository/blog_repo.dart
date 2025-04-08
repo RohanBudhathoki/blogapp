@@ -11,4 +11,5 @@ abstract interface class BlogRepo {
     required String content,
     required String posterId,
   });
+  Future<Either<Failure, List<Blog>>> getBlogs();
 }

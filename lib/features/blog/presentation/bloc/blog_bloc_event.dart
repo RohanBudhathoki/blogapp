@@ -18,3 +18,5 @@ final class BlogUpload extends BlogBlocEvent {
     required this.blogImage,
   });
 }
+
+final class FetchBlogData extends BlogBlocEvent {}

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:blogapp/features/blog/domain/entities/blog.dart';
 
 class BlogModel extends Blog {
@@ -10,6 +8,7 @@ class BlogModel extends Blog {
     required super.posterid,
     required super.dateTime,
     required super.blogImage,
+    super.posterName,
   });
   Map<String, dynamic> tojson() {
     return <String, dynamic>{
@@ -42,6 +41,7 @@ class BlogModel extends Blog {
     String? posterid,
     DateTime? dateTime,
     String? blogImage,
+    String? posterName,
   }) {
     return BlogModel(
       id: id ?? this.id,

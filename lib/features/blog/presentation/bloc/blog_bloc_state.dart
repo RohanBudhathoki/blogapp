@@ -14,3 +14,9 @@ final class Blogblocfailure extends BlogBlocState {
 
   Blogblocfailure(this.message);
 }
+
+final class BlogBlocDisplaySucess extends BlogBlocState {
+  final List<Blog> bloc;
+
+  BlogBlocDisplaySucess(this.bloc);
+}

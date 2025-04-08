@@ -6,6 +6,7 @@ class Blog {
   final String posterid;
   final DateTime dateTime;
   final String blogImage;
+  final String? posterName;
 
   Blog({
     required this.dateTime,
@@ -14,5 +15,6 @@ class Blog {
     required this.content,
     required this.title,
     required this.posterid,
+    this.posterName,
   });
 }

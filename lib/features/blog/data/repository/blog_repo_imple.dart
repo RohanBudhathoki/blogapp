@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:blogapp/core/error/exception.dart';
@@ -46,6 +45,16 @@ class BlogRepoImple implements BlogRepo {
       }
     } on sb.AuthException catch (e) {
       return left(Failure(message: e.message));
+    } on ServerException catch (e) {
+      return left(Failure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Blog>>> getBlogs() async {
+    try {
+      final blogs = await remoteDataSources.getBlogs();
+      return right(blogs);
     } on ServerException catch (e) {
       return left(Failure(message: e.message));
     }

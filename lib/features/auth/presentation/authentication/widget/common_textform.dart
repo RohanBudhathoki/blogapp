@@ -28,6 +28,7 @@ class RegisterTextfield extends StatelessWidget {
         obscuringCharacter: '*',
         keyboardType: keyboardType,
         controller: controller,
+        style: TextStyle(color: AppColor.blackColor),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(
