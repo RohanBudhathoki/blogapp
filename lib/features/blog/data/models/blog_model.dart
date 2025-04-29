@@ -9,6 +9,7 @@ class BlogModel extends Blog {
     required super.dateTime,
     required super.blogImage,
     super.posterName,
+    required super.userName,
   });
   Map<String, dynamic> tojson() {
     return <String, dynamic>{
@@ -18,6 +19,7 @@ class BlogModel extends Blog {
       'poster_id': posterid,
       'updated_at': dateTime.toIso8601String(),
       'blogimage': blogImage,
+      'User': userName,
     };
   }
 
@@ -32,6 +34,7 @@ class BlogModel extends Blog {
               ? DateTime.now()
               : DateTime.parse(map['updated_at']),
       blogImage: map['blogimage'] as String,
+      userName: map['User'] as String,
     );
   }
   BlogModel copyWith({
@@ -42,6 +45,7 @@ class BlogModel extends Blog {
     DateTime? dateTime,
     String? blogImage,
     String? posterName,
+    String? userName,
   }) {
     return BlogModel(
       id: id ?? this.id,
@@ -50,6 +54,7 @@ class BlogModel extends Blog {
       posterid: posterid ?? this.posterid,
       dateTime: dateTime ?? this.dateTime,
       blogImage: blogImage ?? this.blogImage,
+      userName: userName ?? this.userName,
     );
   }
 }

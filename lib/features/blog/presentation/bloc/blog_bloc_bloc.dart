@@ -29,7 +29,7 @@ class BlogBlocBloc extends Bloc<BlogBlocEvent, BlogBlocState> {
         content: event.content,
         title: event.title,
         posterid: event.posterid,
-
+        userName: event.userName,
         blogImage: event.blogImage,
       ),
     );

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:blogapp/core/error/exception.dart';
@@ -22,6 +23,7 @@ class BlogRepoImple implements BlogRepo {
     required String title,
     required String content,
     required String posterId,
+    required String userName,
   }) async {
     try {
       BlogModel blogModel = BlogModel(
@@ -31,7 +33,9 @@ class BlogRepoImple implements BlogRepo {
         posterid: posterId,
         dateTime: DateTime.now(),
         blogImage: '',
+        userName: userName,
       );
+
       final imageurl = await remoteDataSources.uploadImage(
         image: image,
         blog: blogModel,

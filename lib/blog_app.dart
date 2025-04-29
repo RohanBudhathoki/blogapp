@@ -5,6 +5,7 @@ import 'package:blogapp/features/blog/presentation/homescreen/homescreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase/supabase.dart';
 
 class BlogApp extends StatefulWidget {
   const BlogApp({super.key});
@@ -17,6 +18,7 @@ class _BlogAppState extends State<BlogApp> {
   @override
   void initState() {
     context.read<AuthBloc>().add(AuthisUserLoggedIn());
+
     super.initState();
   }
 
@@ -25,16 +27,13 @@ class _BlogAppState extends State<BlogApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: BlocSelector<AppUserCubit, AppUserState, bool>(
-        selector: (state) {
-          return state is AppUserLoggedIn;
-        },
-        builder: (context, isLoggedIn) {
-          if (isLoggedIn) {
-            return Homescreen();
+      home: BlocBuilder<AppUserCubit, AppUserState>(
+        builder: (context, state) {
+          if (state is AppUserLoggedIn) {
+            return Homescreen(user: state.user);
+          } else {
+            return const LoginScreen();
           }
-
-          return const LoginScreen();
         },
       ),
     );

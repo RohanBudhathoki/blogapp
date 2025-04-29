@@ -1,4 +1,6 @@
-import 'package:auto_route/auto_route.dart';
+import 'dart:developer';
+
+import 'package:blogapp/core/common/entities/user.dart';
 import 'package:blogapp/core/common/widgets/loader.dart';
 import 'package:blogapp/core/config/utils/utils.dart';
 import 'package:blogapp/features/blog/presentation/add_blog/add_blog_screen.dart';
@@ -7,9 +9,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-@RoutePage()
 class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+  final User user;
+  const Homescreen({super.key, required this.user});
 
   @override
   State<Homescreen> createState() => _HomescreenState();
@@ -27,12 +29,15 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Blogs'),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => AddBlogScreen()),
+                MaterialPageRoute(
+                  builder: (_) => AddBlogScreen(userNAme: widget.user.name),
+                ),
               );
             },
             icon: Icon(CupertinoIcons.add_circled),
@@ -67,6 +72,7 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                       Text(state.bloc[index].title),
                       Text(state.bloc[index].content),
+                      Text(state.bloc[index].userName),
                     ],
                   ),
                 );

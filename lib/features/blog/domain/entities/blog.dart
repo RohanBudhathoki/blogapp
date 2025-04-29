@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Blog {
   final String id;
   final String content;
@@ -7,6 +6,7 @@ class Blog {
   final DateTime dateTime;
   final String blogImage;
   final String? posterName;
+  final String userName;
 
   Blog({
     required this.dateTime,
@@ -16,5 +16,6 @@ class Blog {
     required this.title,
     required this.posterid,
     this.posterName,
+    required this.userName,
   });
 }

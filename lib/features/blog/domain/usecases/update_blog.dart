@@ -19,6 +19,7 @@ class UpdateBlog implements UseCase<Blog, UpdateBlogParams> {
       title: params.title,
       content: params.content,
       posterId: params.posterid,
+      userName: params.userName,
     );
   }
 }
@@ -27,14 +28,14 @@ class UpdateBlogParams {
   final String content;
   final String title;
   final String posterid;
-
+  final String userName;
   final File blogImage;
 
   UpdateBlogParams({
     required this.content,
     required this.title,
     required this.posterid,
-
+    required this.userName,
     required this.blogImage,
   });
 }

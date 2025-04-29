@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
@@ -8,14 +9,14 @@ import 'package:blogapp/core/config/utils/pick_image.dart';
 import 'package:blogapp/core/config/utils/utils.dart';
 import 'package:blogapp/features/blog/presentation/add_blog/widget/blog_textfield.dart';
 import 'package:blogapp/features/blog/presentation/bloc/blog_bloc_bloc.dart';
-import 'package:blogapp/features/blog/presentation/homescreen/homescreen.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-@RoutePage()
 class AddBlogScreen extends StatefulWidget {
-  const AddBlogScreen({super.key});
+  final String userNAme;
+  const AddBlogScreen({super.key, required this.userNAme});
 
   @override
   State<AddBlogScreen> createState() => _AddBlogScreenState();
@@ -45,6 +46,13 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+            context.read<BlogBlocBloc>().add(FetchBlogData());
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -58,7 +66,7 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
                     content: contentController.text.trim(),
                     title: titleController.text.trim(),
                     posterid: posterId,
-
+                    userName: widget.userNAme,
                     blogImage: imagePicked!,
                   ),
                 );
@@ -74,11 +82,8 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
             flushBar(context, state.message);
           }
           if (state is BlogblocSucess) {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (_) => Homescreen()),
-              (r) => false,
-            );
+            context.read<BlogBlocBloc>().add(FetchBlogData());
+            Navigator.pop(context);
           }
         },
         builder: (context, state) {
@@ -94,42 +99,36 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
                     onTap: () {
                       selectedImage();
                     },
-                    child: Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        child: Center(
-                          child:
-                              imagePicked == null
-                                  ? Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.blueGrey,
-                                      ),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(24),
-                                      ),
-                                    ),
-                                    height: 300,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Center(child: Text("Add Image")),
-                                  )
-                                  : Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.blueGrey,
-                                      ),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(24),
-                                      ),
-                                    ),
-                                    height: 300,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Image.file(
-                                      imagePicked!,
-                                      fit: BoxFit.cover,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      child: Center(
+                        child:
+                            imagePicked == null
+                                ? Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.blueGrey),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(24),
                                     ),
                                   ),
-                        ),
+                                  height: 300,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Center(child: Text("Add Image")),
+                                )
+                                : Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.blueGrey),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(24),
+                                    ),
+                                  ),
+                                  height: 300,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Image.file(
+                                    imagePicked!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                       ),
                     ),
                   ),
