@@ -1,11 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:blogapp/core/common/widgets/loader.dart';
-import 'package:blogapp/core/utils/utils.dart';
+import 'package:blogapp/core/config/utils/utils.dart';
 import 'package:blogapp/features/blog/presentation/add_blog/add_blog_screen.dart';
 import 'package:blogapp/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
 
@@ -56,11 +58,15 @@ class _HomescreenState extends State<Homescreen> {
               itemBuilder: (context, index) {
                 return Card(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
                     children: [
                       SizedBox(
                         height: 100,
-                        child: Image.network('${state.bloc[index].blogImage}'),
+                        child: Image.network(state.bloc[index].blogImage),
                       ),
+                      Text(state.bloc[index].title),
+                      Text(state.bloc[index].content),
                     ],
                   ),
                 );

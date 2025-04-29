@@ -1,11 +1,11 @@
-import 'dart:developer';
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:blogapp/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:blogapp/core/common/widgets/loader.dart';
 import 'package:blogapp/core/res/space.dart';
-import 'package:blogapp/core/utils/pick_image.dart';
-import 'package:blogapp/core/utils/utils.dart';
+import 'package:blogapp/core/config/utils/pick_image.dart';
+import 'package:blogapp/core/config/utils/utils.dart';
 import 'package:blogapp/features/blog/presentation/add_blog/widget/blog_textfield.dart';
 import 'package:blogapp/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:blogapp/features/blog/presentation/homescreen/homescreen.dart';
@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class AddBlogScreen extends StatefulWidget {
   const AddBlogScreen({super.key});
 
@@ -99,8 +100,35 @@ class _AddBlogScreenState extends State<AddBlogScreen> {
                         child: Center(
                           child:
                               imagePicked == null
-                                  ? Text('Add picture')
-                                  : Image.file(imagePicked!, fit: BoxFit.cover),
+                                  ? Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.blueGrey,
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(24),
+                                      ),
+                                    ),
+                                    height: 300,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Center(child: Text("Add Image")),
+                                  )
+                                  : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.blueGrey,
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(24),
+                                      ),
+                                    ),
+                                    height: 300,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Image.file(
+                                      imagePicked!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                         ),
                       ),
                     ),

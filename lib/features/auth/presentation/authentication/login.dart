@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:blogapp/core/common/widgets/loader.dart';
+
 import 'package:blogapp/core/controller/controller_text.dart';
 import 'package:blogapp/core/theme/color.dart';
-import 'package:blogapp/core/utils/utils.dart';
+import 'package:blogapp/core/config/utils/utils.dart';
+import 'package:blogapp/features/auth/presentation/authentication/sign_up.dart';
 import 'package:blogapp/features/auth/presentation/authentication/widget/common_authbutton.dart';
 import 'package:blogapp/features/auth/presentation/authentication/widget/common_textform.dart';
 import 'package:blogapp/features/auth/presentation/bloc/auth_bloc.dart';
@@ -9,6 +12,7 @@ import 'package:blogapp/core/res/space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -62,6 +66,16 @@ class LoginScreen extends StatelessWidget {
                       );
                     },
                     text: 'Login',
+                  ),
+                  SizedBox(height: 50),
+                  CommonAuthButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SignUpScreen()),
+                      );
+                    },
+                    text: 'Sign Up',
                   ),
                 ],
               ),
