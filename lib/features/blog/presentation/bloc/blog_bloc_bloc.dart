@@ -24,6 +24,7 @@ class BlogBlocBloc extends Bloc<BlogBlocEvent, BlogBlocState> {
     on<FetchBlogData>(_onGetBLog);
   }
   void _onBlogUpload(BlogUpload event, Emitter<BlogBlocState> emit) async {
+    emit(BlogblocLoading());
     final res = await _uploadBlog(
       UpdateBlogParams(
         content: event.content,
